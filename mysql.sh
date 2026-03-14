@@ -37,7 +37,7 @@ log() {
 
 check_root() {
     if [ "$EUID" -ne 0 ]; then
-        log "${R} ERROR: Please run this script as root user ${N}"
+        log "${R}ERROR: Please run this script as root user ${N}"
         exit 1
     fi
 }
@@ -62,11 +62,11 @@ validate() {
 mysql_installation() {
     if ! dnf list installed mysql-server &>> "$LOGFILE"
     then
-        log "$Y Installing mysql server $N"
+        log "${Y}Installing mysql server ${N}"
         dnf install mysql-server -y
         validate $? "Installing MySQL"
     else
-        log "$Y MySQL server is already installed, Skipping this step $N"
+        log "${Y}MySQL server is already installed, Skipping this step $N"
     fi
 }
 
@@ -86,13 +86,13 @@ setup_mysql_service() {
 #   Main Function
 #############################################
 main() {
-    log "$C Starting script at : $(date) $N"
+    log "${C}Starting script at : $(date)${N}"
 
     check_root
     mysql_installation
     setup_mysql_service
 
-    log "$G Script completed successfully $N"
+    log "${G}Script completed successfully${N}"
 }
 
 ###############################################
