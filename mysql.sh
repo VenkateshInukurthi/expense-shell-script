@@ -11,11 +11,11 @@ SCRIPT_NAME=$(basename "$0" .sh)
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 LOGFILE="$LOG_FOLDER/${SCRIPT_NAME}_${TIMESTAMP}.log"
 
-R="/e[31m"
-G="/e[32m"
-Y="/e[33m"
-N="/e[0m"
-C="/e[36m"
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+C="\e[36m"
 
 ##########################################
 #   Ensure log directory exists
@@ -37,7 +37,7 @@ log() {
 
 check_root() {
     if [ "$EUID" -ne 0 ]; then
-        log "$R ERROR: Please run this script as root user $N"
+        log "${R} ERROR: Please run this script as root user ${N}"
         exit 1
     fi
 }
