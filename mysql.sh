@@ -89,7 +89,7 @@ main() {
     log "$C Starting script at : $(date) $N"
 
     check_root
-    install_mysql
+    mysql_installation
     setup_mysql_service
 
     log "$G Script completed successfully $N"
