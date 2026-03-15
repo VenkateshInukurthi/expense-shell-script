@@ -104,6 +104,7 @@ cd /app
 
 RUN "unzip /tmp/backend.zip" "Extracting backend application code"
 RUN "npm install" "Installing NodeJS dependencies"
+RUN "cp /opt/expense-shell-script/backend.service /etc/systemd/system/backend.service" "Copying backend service file"
 
 ################################################
 #   Database setup
@@ -115,7 +116,7 @@ RUN "mysql -h mysql.devsecopslab.cloud -uroot -pExpenseApp@1 < /app/schema/backe
 #   Systemd service startup
 ###############################################
 
-RUN "cp /opt/expense-shell-script/backend.service /etc/systemd/system/backend.service" "Copying backend service file"
+
 RUN "systemctl daemon-reload" "Reloading Systemd daemon"
 ################################################
 #   Start backend Service
