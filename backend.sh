@@ -9,7 +9,7 @@ set -euo pipefail
 LOG_FOLDER="/var/log/expenses"
 SCRIPT_NAME=$(basename "$0" .sh)
 TIMESTAMP=$(date +%Y%m%d-%H%M%S)
-LOGFILE="$LOG_FOLDER/${SCRIPT_NAME}_${TIMESTAMP}.log"
+LOG_FILE="$LOG_FOLDER/${SCRIPT_NAME}_${TIMESTAMP}.log"
 APP_DIR="/app"
 
 R="\e[31m"
@@ -76,7 +76,7 @@ CHECK_ROOT
 #   NodeJS installation
 #############################################
 
-RUN "dnf module disable -y" "Disabling NodeJS default version"
+RUN "dnf module disable nodejs -y" "Disabling NodeJS default version"
 RUN "dnf module enable nodejs:20 -y" "Enabling NodeJS 20 version"
 RUN "dnf install nodejs -y" "Installing NodeJS"
 
@@ -110,7 +110,7 @@ RUN "npm install" "Installing NodeJS dependencies"
 ###############################################
 
 RUN "cp /opt/expense-shell-script/backend.service /etc/systemd/system/backend.service" "Copying backend service file"
-RUN "systemctl daemon-relaod" "Reloading Systemd daemon"
+RUN "systemctl daemon-reload" "Reloading Systemd daemon"
 
 ################################################
 #   Database setup
